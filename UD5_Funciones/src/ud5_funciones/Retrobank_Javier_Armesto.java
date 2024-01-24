@@ -21,16 +21,17 @@ public class Retrobank_Javier_Armesto {
 //  validarNombre Comprueba y valida que el nombre de una cuenta que se pasa como String no esté repetido, devuelve true si cumple condición.
 //  int pedirIntEnRango(int min, int max) Lee un entero, que devuelve, entre un rango mínimo y máximo.
 //  String pedirString() Lee un String, que devuelve, por entrada de teclado.
-//  printCuentasTodas(String[] vc, String[] vn, String[] vs) Imprime todas las cuentas en el formato solicitado.
-//  printCuentasVector(String[] vc, String[] vn, String[] vs, int i) Imprime la cuenta en el formato solicitado de la posición pos que se pasa como argumento.
-//  printCuentaPos (String[] vc, String[] vn, String[] vs, int pos) Hace lo mismo que la anterior pero añade tabuladores en la presentación.
-//  agregarCuenta(String[] vc, String[] vn, String[] vs, String c, String n, String s) Añade una cuenta nueva comprobando que no se exceda el número máximo de cuentas.
-//  agregarSaldo(String[] vc, String[] vn, String[] vs, String ingreso, int IDCuenta) Añade saldo a una cuenta.
-//  retirarSaldo(String[] vc, String[] vn, String[] vs, String retirada, int IDCuenta) Retira saldo de una cuenta.
-//  eliminarCuenta(String[] vc, String[] vn, String[] vs, int pos) Elimina la cuenta de una posición determinada.
+//  printCuentasTodas(String[] numCuenta, String[] nomTitular, String[] saldoCuenta) Imprime todas las cuentas en el formato solicitado.
+//  printCuentasVector(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, int i) Imprime la cuenta en el formato solicitado de la posición pos que se pasa como argumento.
+//  printCuentaPos (String[] numCuenta, String[] nomTitular, String[] saldoCuenta, int pos) Hace lo mismo que la anterior pero añade tabuladores en la presentación.
+//  agregarCuenta(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, String c, String n, String s) Añade una cuenta nueva comprobando que no se exceda el número máximo de cuentas.
+//  agregarSaldo(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, String ingreso, int idCuentauenta) Añade saldo a una cuenta.
+//  retirarSaldo(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, String retirada, int idCuentauenta) Retira saldo de una cuenta.
+//  eliminarCuenta(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, int pos) Elimina la cuenta de una posición determinada.
 //  eliminarPosDeVector(String[] vector, int pos) Mueve todos los elementos a la derecha de una posición determinada, desplazándolos una posición a la izquierda.
-//  buscarCuenta(String[] vc, String[] vn, String[] vs, String buscar) Pide un texto que busca en los nombres de cuentas y si existen las imprime.
-//  boolean validarNombre(String[] vc, String[] vn, String[] vs,String nombre) Nos devuelve un valor booleano si el nombre no está repetido en otra cuenta.
+//  buscarCuenta(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, String buscar) Pide un texto que busca en los nombres de cuentas y si existen las imprime.
+//  boolean validarNombre(String[] numCuenta, String[] nomTitular, String[] saldoCuenta,String nombre) Nos devuelve un valor booleano si el nombre no está repetido en otra cuenta.
+//  int obtenerOpcionMenu() Valida que se introduzca un entero en el rango del menú.
     
     
     //PRINCIPAL
@@ -38,9 +39,9 @@ public class Retrobank_Javier_Armesto {
     public static void main(String[] args) {
         
         // Vectores con la información de las cuentas
-        String[] vc = new String[maxC]; // vector de cuentas
-        String[] vn = new String[maxC]; // vector de nombres de clientes
-        String[] vs = new String[maxC]; // vector de saldos
+        String[] numCuenta = new String[maxC]; // vector de cuentas
+        String[] nomTitular = new String[maxC]; // vector de nombres de clientes
+        String[] saldoCuenta = new String[maxC]; // vector de saldos
         
         // Variables auxiliares
         int opcion;     // opcion del menú
@@ -59,14 +60,14 @@ public class Retrobank_Javier_Armesto {
                 case 1:
                     // Ver cuentas numeradas con ID
                     if (numC==0) System.out.println("No hay cuentas");
-                    else printCuentasTodas(vc, vn, vs);
+                    else printCuentasTodas(numCuenta, nomTitular, saldoCuenta);
                     break;
 
                 case 2:
                     // Ingresar dinero y actualizar saldo de la cuenta
-                    printCuentasTodas(vc, vn, vs);
+                    printCuentasTodas(numCuenta, nomTitular, saldoCuenta);
                     System.out.print("¿En qué cuenta? ");
-                    int IDC = pedirIntEnRango(0, numC);
+                    int idCuenta = pedirIntEnRango(0, numC);
                     System.out.print("¿Cuanto dinero ingresas? ");
                     boolean cierto = true;
                     
@@ -74,25 +75,27 @@ public class Retrobank_Javier_Armesto {
                     ingreso = pedirString();
                     int cant = Integer.parseInt(ingreso);
                     if (cant>0) { cierto = false;}
+                    else { System.out.print("AVISO: La cantidad debe ser mayor que cero. Vuelve a intentarlo: ");}
                     }
                     while (cierto);
-                    agregarSaldo(vc, vn, vs, ingreso, IDC);
+                    agregarSaldo(numCuenta, nomTitular, saldoCuenta, ingreso, idCuenta);
                     break;
 
                 case 3:
                     // Retirar dinero y actualizar saldo de la cuenta
-                    printCuentasTodas(vc, vn, vs);
+                    printCuentasTodas(numCuenta, nomTitular, saldoCuenta);
                     System.out.print("¿En qué cuenta? ");
-                    IDC = pedirIntEnRango(0, numC);
+                    idCuenta = pedirIntEnRango(0, numC);
                     System.out.print("¿Cuanto dinero retiras? ");
                     cierto = true;
                     do {
                     ingreso = pedirString();
                     int cant = Integer.parseInt(ingreso);
-                    if (cant<0) { cierto = false;}
+                    if (cant>0) { cierto = false;}
+                    else { System.out.print("AVISO: La cantidad debe ser mayor que cero. Vuelve a intentarlo: ");}
                     }
                     while (cierto);
-                    retirarSaldo(vc, vn, vs, ingreso, IDC);
+                    retirarSaldo(numCuenta, nomTitular, saldoCuenta, ingreso, idCuenta);
                     break;
 
                 case 4:
@@ -103,34 +106,34 @@ public class Retrobank_Javier_Armesto {
                     do {
                     System.out.print("¿Nombre del cliente? ");
                     n = pedirString();
-                    noOkNombre = validarNombre(vc, vn, vs, n);
+                    noOkNombre = validarNombre(numCuenta, nomTitular, saldoCuenta, n);
                     }
                     while (!noOkNombre);
                     System.out.print("¿Saldo inicial? ");
                     s = pedirString();
-                    agregarCuenta(vc, vn, vs, c, n, s);
+                    agregarCuenta(numCuenta, nomTitular, saldoCuenta, c, n, s);
                     break;
 
                 case 5:
                     // Eliminar cuenta
                     System.out.print("¿ID de cuenta a eliminar? ");
                     pos = pedirIntEnRango(0, numC - 1);
-                    eliminarCuenta(vc, vn, vs, pos);
+                    eliminarCuenta(numCuenta, nomTitular, saldoCuenta, pos);
                     break;
 
                 case 6:
                     // Buscar cuentas por cadenas nombre
                     System.out.print("¿Cadena a buscar en el nombre? ");
                     buscar = pedirString();
-                    buscarCuenta(vc, vn, vs, buscar);
+                    buscarCuenta(numCuenta, nomTitular, saldoCuenta, buscar);
                     break;
 
                 case 7:
                     // Mostrar morosos
                     System.out.println("Listado de morosos ");
                     for (int i = 0; i < numC; i++) {
-                        if (Integer.parseInt(vs[i])<0) {
-                          printCuentaPos(vc, vn, vs, i);  
+                        if (Integer.parseInt(saldoCuenta[i])<0) {
+                          printCuentaPos(numCuenta, nomTitular, saldoCuenta, i);  
                         }
                     }
                     break;
@@ -161,9 +164,9 @@ public class Retrobank_Javier_Armesto {
         System.out.println("7. Mostrar morosos.");
         System.out.println("8. Salir.");
         System.out.println("--------------------------");
-        System.out.print("¿Opción? ");
+//        System.out.print("¿Opción? ");
 
-        int opcion = pedirIntEnRango(1, 8);
+        int opcion = obtenerOpcionMenu();
         
         return opcion;
     }
@@ -191,61 +194,61 @@ public class Retrobank_Javier_Armesto {
         return in.nextLine();
     }
     
-    // Imprime la información de todas las cuentas printCuentasTodas(vc, vn, vs);
-    public static void printCuentasTodas(String[] vc, String[] vn, String[] vs) {
+    // Imprime la información de todas las cuentas printCuentasTodas(numCuenta, nomTitular, saldoCuenta);
+    public static void printCuentasTodas(String[] numCuenta, String[] nomTitular, String[] saldoCuenta) {
         //System.out.println("Orden\tNúm. Cuenta\tNombre\tSaldo");
         for (int i = 0; i < numC; i++) {
-            printCuentaPos(vc, vn, vs, i);
+            printCuentaPos(numCuenta, nomTitular, saldoCuenta, i);
         }
     }
     
-    public static void printCuentasVector(String[] vc, String[] vn, String[] vs, int i) {
+    public static void printCuentasVector(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, int i) {
         for (int j = 0; j < numC; j++) {
-            printCuentaPos(vc, vn, vs, j);
+            printCuentaPos(numCuenta, nomTitular, saldoCuenta, j);
         }
     }
     
-    public static void printCuentaPos (String[] vc, String[] vn, String[] vs, int pos) {
+    public static void printCuentaPos (String[] numCuenta, String[] nomTitular, String[] saldoCuenta, int pos) {
         
-        System.out.println(pos + ". \t" + vc[pos] + " - \t" + vn[pos] + " - \t" + "Saldo: "+ vs[pos]);
+        System.out.println(pos + ". \t" + numCuenta[pos] + " - \t" + nomTitular[pos] + " - \t" + "Saldo: "+ saldoCuenta[pos]);
     }
     
-    public static void agregarCuenta(String[] vc, String[] vn, String[] vs, String c, String n, String s) {
+    public static void agregarCuenta(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, String c, String n, String s) {
         
         if (numC < maxC) {
-            vc[numC] = c;
-            vn[numC] = n;
-            vs[numC] = s;
+            numCuenta[numC] = c;
+            nomTitular[numC] = n;
+            saldoCuenta[numC] = s;
             numC++;
         } else {
             System.out.println("ERROR: No se puede agregar más cuentas. Lista llena.");
         }
     }
     
-    public static void agregarSaldo(String[] vc, String[] vn, String[] vs, String ingreso, int IDCuenta) {
+    public static void agregarSaldo(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, String ingreso, int idCuentauenta) {
         
         int saldoAnterior, saldoNuevo, cantIngresar;
         cantIngresar = Integer.parseInt(ingreso);
-        saldoAnterior = Integer.parseInt(vs[IDCuenta]);
+        saldoAnterior = Integer.parseInt(saldoCuenta[idCuentauenta]);
         saldoNuevo = saldoAnterior + cantIngresar;
-        vs[IDCuenta] = String.valueOf(saldoNuevo);
+        saldoCuenta[idCuentauenta] = String.valueOf(saldoNuevo);
     }
     
-    public static void retirarSaldo(String[] vc, String[] vn, String[] vs, String retirada, int IDCuenta) {
+    public static void retirarSaldo(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, String retirada, int idCuentauenta) {
         
         int saldoAnterior, saldoNuevo, cantretirar;
         cantretirar = Integer.parseInt(retirada);
-        saldoAnterior = Integer.parseInt(vs[IDCuenta]);
+        saldoAnterior = Integer.parseInt(saldoCuenta[idCuentauenta]);
         saldoNuevo = saldoAnterior - cantretirar;
-        vs[IDCuenta] = String.valueOf(saldoNuevo);
+        saldoCuenta[idCuentauenta] = String.valueOf(saldoNuevo);
     }
     
     // Elimina de los vectores la cuenta en la posición 'pos'
-    public static void eliminarCuenta(String[] vc, String[] vn, String[] vs, int pos) {
+    public static void eliminarCuenta(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, int pos) {
         if (pos >= 0 && pos < numC) {
-            eliminarPosDeVector(vc, pos);
-            eliminarPosDeVector(vn, pos);
-            eliminarPosDeVector(vs, pos);
+            eliminarPosDeVector(numCuenta, pos);
+            eliminarPosDeVector(nomTitular, pos);
+            eliminarPosDeVector(saldoCuenta, pos);
             numC--;
         } else {
             System.out.println("ERROR: No se puede eliminar cuenta. Posición fuera de rango.");
@@ -259,27 +262,47 @@ public class Retrobank_Javier_Armesto {
         }
     }
     
-    public static void buscarCuenta(String[] vc, String[] vn, String[] vs, String buscar) {
+    public static void buscarCuenta(String[] numCuenta, String[] nomTitular, String[] saldoCuenta, String buscar) {
 //        int[] vpos = new int[maxC];
 //        int npos = 0;
         for (int i = 0; i < numC; i++) {
-            if (vn[i].toUpperCase().contains(buscar.toUpperCase())) {
+            if (nomTitular[i].toUpperCase().contains(buscar.toUpperCase())) {
                 //imprimir cuenta
-                printCuentaPos (vc, vn, vs, i);
+                printCuentaPos (numCuenta, nomTitular, saldoCuenta, i);
 //                npos++;
             }
             
         }
     }
     
-    public static boolean validarNombre(String[] vc, String[] vn, String[] vs,String nombre){
+    public static boolean validarNombre(String[] numCuenta, String[] nomTitular, String[] saldoCuenta,String nombre){
         boolean nombreBueno;
         nombreBueno = true;
         for (int i = 0; i < numC; i++) {
-            if (vn[i].contains(nombre)) {
+            if (nomTitular[i].contains(nombre)) {
                 nombreBueno = false;
             }
         }
         return nombreBueno;
     }
+    
+    public static int obtenerOpcionMenu() {
+    int opcion = 0;
+    boolean entradaValida = false;
+    Scanner scanner = new Scanner(System.in);
+
+    do {
+        System.out.print("¿Opción? ");
+        if (scanner.hasNextInt()) {
+            opcion = scanner.nextInt();
+            entradaValida = true;
+        } else {
+            System.out.println("AVISO: Ingresa un número válido. Vuelve a intentarlo.");
+            scanner.next(); // Limpiar el buffer del scanner
+        }
+    } while (!entradaValida);
+
+    return opcion;
+}
+
 }
