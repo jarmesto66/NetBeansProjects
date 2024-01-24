@@ -24,7 +24,7 @@ public class Ej_5 {
         
         Scanner scr = new Scanner (System.in);
         int millas;
-        System.out.print("Dame el valor de la millas: ");
+        System.out.print("Dame un valor en millas: ");
         millas = scr.nextInt();
         
         System.out.println(millas+" millas son "+millas_a_kilometros(millas)+" kuilometros");

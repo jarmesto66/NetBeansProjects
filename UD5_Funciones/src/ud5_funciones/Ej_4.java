@@ -34,7 +34,7 @@ public class Ej_4 {
         System.out.print("Dame un número entero: ");
         a = scr.nextInt();
         
-        System.out.println("El número es: "+dimeSigno(a));
+        System.out.println("El número es (0 si es cero, -1 si es negativo, 1 si es positivo): "+dimeSigno(a));
         
         
     }
