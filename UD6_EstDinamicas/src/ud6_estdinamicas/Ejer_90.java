@@ -48,17 +48,17 @@ public class Ejer_90 {
         
         //Creamos un ArrayList con las claves para poder acceder por valor absoluto aleatorio x
         ArrayList <String> claves = new ArrayList<String> (diccionario.keySet());
-        
-//        System.out.println("Listado de Keys: ");
-//        for (int i = 0; i < claves.size(); i++) {
-//            System.out.println("-> " + claves.get(i));
-//            
-//        }
+        ArrayList <String> examen = new ArrayList<String>();
+
+            String key;
+            int n;
         
         //Determinamos los 5 valores aleatorios a preguntar en un bucle y resolvemos almacenando los aciertos
-        for (int i = 0; i < preguntas; i++) {
-            // En principio no comprobamos si algún valor se repite porque no nos lo piden
-            int x = (int)(Math.random()*(19-0+1)+0);
+        for (int i = 1; i <= preguntas; i++) {
+            
+            int x = (int)(Math.random()*(diccionario.size()-0+1)+0);
+            key = examen.get(x);
+            
             //Acce
             System.out.println("Dime la traducción de: " + claves.get(x));            
             palabra = leePalabra.nextLine();
