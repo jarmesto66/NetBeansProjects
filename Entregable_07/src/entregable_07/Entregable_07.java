@@ -332,8 +332,16 @@ public class Entregable_07 {
         anotacion = new Biblioteca (biblioteca, libro, 5, 0);
         inventario.add(anotacion);
         
-        libro = new Ejemplar("El Señor de los anillos", "Tolkien", Ejemplar.Genero.FANTASIA);
+        libro = new Ejemplar("El Señor de los anillos", "R.R.Tolkien", Ejemplar.Genero.FANTASIA);
         anotacion = new Biblioteca (biblioteca, libro, 5, 0);
+        inventario.add(anotacion);
+        
+        libro = new Ejemplar("Marie Curie", "Adela Muñoz Paéz", Ejemplar.Genero.HISTORICO);
+        anotacion = new Biblioteca (biblioteca, libro, 1, 0);
+        inventario.add(anotacion);
+        
+        libro = new Ejemplar("Proegramación en Pascal", "O.M. Stefania", Ejemplar.Genero.EDUCATIVO);
+        anotacion = new Biblioteca (biblioteca, libro, 1, 0);
         inventario.add(anotacion);
         
         // public Biblioteca(String nomBiblioteca, Ejemplar libro, int copiasEjemplar, int copiasPrestadas)
