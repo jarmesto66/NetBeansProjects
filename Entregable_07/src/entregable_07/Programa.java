@@ -8,7 +8,7 @@ import java.util.Scanner;
  *
  * @author JAVIER ARMESTO - 1º DAW
  */
-public class Entregable_07 {
+public class Programa {
     
     public static void escribirMenu(){
         
@@ -318,7 +318,7 @@ public class Entregable_07 {
     public static void main(String[] args) {
         
         ArrayList<Biblioteca> inventario = new ArrayList();
-        final String biblioteca="Biblioteca Central";
+        final String biblioteca="Biblioteca Central"; //Gestionamos una biblioteca concreta.
         Scanner op = new Scanner(System.in);
         int opMenu;
         boolean salir = false;
@@ -340,59 +340,55 @@ public class Entregable_07 {
         anotacion = new Biblioteca (biblioteca, libro, 1, 0);
         inventario.add(anotacion);
         
-        libro = new Ejemplar("Proegramación en Pascal", "O.M. Stefania", Ejemplar.Genero.EDUCATIVO);
+        libro = new Ejemplar("Programación en Pascal", "O.M. Stefania", Ejemplar.Genero.EDUCATIVO);
         anotacion = new Biblioteca (biblioteca, libro, 1, 0);
         inventario.add(anotacion);
         
-        // public Biblioteca(String nomBiblioteca, Ejemplar libro, int copiasEjemplar, int copiasPrestadas)
-        // public Ejemplar(String titulo, String autor, Genero genero)
-        
         while (!salir){
         
-        escribirMenu();
-        opMenu = op.nextInt();
-        switch (opMenu) {
-        case 1:
-            registrarLibro(inventario);
-            break;
-        case 2:
-            eliminarLibro(inventario);
-            break;
-        case 3:
-            aumentarCopias(inventario);
-            break;
-        case 4:
-            disminuirCopias(inventario);
-            break;
-        case 5:
-            prestarLibro(inventario);
-            break;
-        case 6:
-            devolverLibro(inventario);
-            break;
-        case 7:
-            listarLibros(inventario);
-            break;
-        case 8:
-            listarLibrosDisponibles(inventario);
-            break;
-        case 9:
-            buscarLibroPorTitulo(inventario);
-            break;
-        case 10:
-            buscarLibroPorAutor(inventario);
-            break;
-        case 0:
-            System.out.println("Saliendo del programa...");
-            salir = true;
-            //rl.close();
-            break;
-        default:
-            System.err.println("Opción no válida.");
-            System.out.println("");
-        
-        
-        }
+            escribirMenu();
+            opMenu = op.nextInt();
+            switch (opMenu) {
+            case 1:
+                registrarLibro(inventario);
+                break;
+            case 2:
+                eliminarLibro(inventario);
+                break;
+            case 3:
+                aumentarCopias(inventario);
+                break;
+            case 4:
+                disminuirCopias(inventario);
+                break;
+            case 5:
+                prestarLibro(inventario);
+                break;
+            case 6:
+                devolverLibro(inventario);
+                break;
+            case 7:
+                listarLibros(inventario);
+                break;
+            case 8:
+                listarLibrosDisponibles(inventario);
+                break;
+            case 9:
+                buscarLibroPorTitulo(inventario);
+                break;
+            case 10:
+                buscarLibroPorAutor(inventario);
+                break;
+            case 0:
+                System.out.println("Saliendo del programa...");
+                salir = true;
+                //rl.close();
+                break;
+            default:
+                System.err.println("Opción no válida.");
+                System.out.println("");
+
+            }
     }
     
 }

@@ -48,8 +48,5 @@ public class Biblioteca {
         this.copiasPrestadas = copiasPrestadas;
     }
 
-    //METODOS
-    
-    
     
 }
