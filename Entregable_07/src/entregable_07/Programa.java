@@ -102,7 +102,7 @@ public class Programa {
         // Crear un nuevo objeto Ejemplar con la información proporcionada
         Ejemplar libro = new Ejemplar(titulo, autor, genero);
 
-        // Crear un nuevo objeto Biblioteca y agregarlo al inventario
+        // Crear un nuevo objeto Biblioteca y agregarlo al inventario de la Biblioteca Central
         Biblioteca nuevoLibro = new Biblioteca("Biblioteca Central", libro, copiasDisponibles, 0);
         inventario.add(nuevoLibro);
 
