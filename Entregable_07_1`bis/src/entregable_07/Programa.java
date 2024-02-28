@@ -29,7 +29,7 @@ public class Programa {
         
     }
     
-    public static Ejemplar.Genero leerGenero() {
+/*    public static Ejemplar.Genero leerGenero() {
     boolean correcto = false;
     Ejemplar.Genero genero = null;
     Scanner rc = new Scanner(System.in);
@@ -80,7 +80,7 @@ public class Programa {
         }
     }
     return genero; // Devolvemos el género seleccionado
-}
+}*/
     
     public static void registrarLibro(ArrayList<Biblioteca> inventario) {
         Scanner scanner = new Scanner(System.in);
@@ -92,7 +92,7 @@ public class Programa {
         titulo = scanner.nextLine();
         System.out.println("Ingrese el autor del libro:");
         autor = scanner.nextLine();
-        genero = leerGenero(); // Deberás implementar el método leerGenero() si aún no lo has hecho
+        genero = Ejemplar.leerGenero(); // Deberás implementar el método leerGenero() si aún no lo has hecho
 
         // Solicitar el número de copias disponibles al usuario
         System.out.println("Ingrese el número de copias disponibles:");
