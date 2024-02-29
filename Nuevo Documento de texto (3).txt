@@ -1,0 +1,16 @@
+// Dentro del programa principal
+public static void main(String[] args) {
+    // Otras partes del código...
+
+    // Crear una lista para almacenar los libros en el inventario de la biblioteca
+    ArrayList<Biblioteca> inventario = new ArrayList<>();
+
+    // Crear una instancia de la clase Scanner para la entrada del usuario
+    Scanner scanner = new Scanner(System.in);
+
+    // Llamar al método registrarLibro() de la clase Biblioteca
+    Biblioteca biblioteca = new Biblioteca();
+    biblioteca.registrarLibro(inventario);
+
+    // Otras partes del código...
+}

@@ -1,0 +1,82 @@
+package entregable_07;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author JAVIER ARMESTO - 1º DAW
+ */
+public class Biblioteca {
+    
+    // Atributos
+    private String nomBiblioteca;
+    private Ejemplar libro;
+    private int copiasEjemplar;
+    private int copiasPrestadas;
+    
+    // Constructores
+    public Biblioteca() {
+    }
+
+    public Biblioteca(String nomBiblioteca, Ejemplar libro, int copiasEjemplar, int copiasPrestadas) {
+        this.nomBiblioteca = nomBiblioteca;
+        this.libro = libro;
+        this.copiasEjemplar = copiasEjemplar;
+        this.copiasPrestadas = copiasPrestadas;
+    }
+    
+    // Getters
+    public int getCopiasEjemplar() {
+        return copiasEjemplar;
+    }
+
+    public int getCopiasPrestadas() {
+        return copiasPrestadas;
+    }
+
+    public Ejemplar getLibro() {
+        return libro;
+    }
+    
+    // Setters
+    public void setCopiasEjemplar(int copiasEjemplar) {
+        this.copiasEjemplar = copiasEjemplar;
+    }
+
+    public void setCopiasPrestadas(int copiasPrestadas) {
+        this.copiasPrestadas = copiasPrestadas;
+    }
+
+    // Otros métodos
+
+    public void registrarLibro(ArrayList<Biblioteca> inventario) {
+        Scanner scanner = new Scanner(System.in);
+        String titulo, autor;
+        Ejemplar.Genero genero;
+
+        // Solicitar información del libro al usuario
+        System.out.println("Ingrese el título del libro:");
+        titulo = scanner.nextLine();
+        System.out.println("Ingrese el autor del libro:");
+        autor = scanner.nextLine();
+        genero = Ejemplar.leerGenero(); // Llamada al método leerGenero() de la clase Ejemplar
+
+        // Solicitar el número de copias disponibles al usuario
+        System.out.println("Ingrese el número de copias disponibles:");
+        int copiasDisponibles = scanner.nextInt();
+        scanner.nextLine(); // Consumir el salto de línea pendiente
+
+        // Crear un nuevo objeto Ejemplar con la información proporcionada
+        Ejemplar libro = new Ejemplar(titulo, autor, genero);
+
+        // Crear un nuevo objeto Biblioteca y agregarlo al inventario de la Biblioteca Central
+        Biblioteca nuevoLibro = new Biblioteca("Biblioteca Central", libro, copiasDisponibles, 0);
+        inventario.add(nuevoLibro);
+
+        System.out.println("El libro se ha registrado correctamente en el inventario.");
+    }
+
+    // Otros métodos relacionados con la biblioteca...
+
+}

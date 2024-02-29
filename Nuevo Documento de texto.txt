@@ -1,0 +1,32 @@
+Para pasar los métodos del programa principal a las clases correspondientes (Ejemplar y Biblioteca), debes considerar qué métodos tienen más sentido en cada clase en función de la responsabilidad de cada una. Aquí hay algunas pautas generales:
+
+    Principio de responsabilidad única (SRP): Cada clase debe tener una sola responsabilidad y todos sus métodos deben estar relacionados con esa responsabilidad. Por lo tanto, debes colocar los métodos donde tengan más sentido en términos de qué datos o funcionalidades están manipulando.
+
+    Encapsulamiento: Si un método opera principalmente en los datos de una clase específica, debería estar dentro de esa clase.
+
+Dado esto, aquí hay una sugerencia de cómo podrías redistribuir los métodos:
+Métodos relacionados con la clase Ejemplar:
+
+    leerGenero(): Podría ser un método estático dentro de la clase Ejemplar.
+    toString(): Ya está en la clase Ejemplar.
+
+Métodos relacionados con la clase Biblioteca:
+
+    registrarLibro(ArrayList<Biblioteca> inventario): Este método podría estar en la clase Biblioteca. Podría crear un nuevo objeto Biblioteca dentro de este método.
+    eliminarLibro(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+    aumentarCopias(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+    disminuirCopias(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+    prestarLibro(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+    devolverLibro(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+    listarLibros(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+    listarLibrosDisponibles(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+    buscarLibroPorTitulo(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+    buscarLibroPorAutor(ArrayList<Biblioteca> inventario): Podría estar en la clase Biblioteca.
+
+Cómo implementarlo:
+
+    Copia los métodos mencionados anteriormente a las clases correspondientes (Ejemplar o Biblioteca).
+    Asegúrate de ajustar los parámetros y referencias a las variables según sea necesario.
+    Si algunos métodos necesitan acceder a variables privadas de otra clase, proporciona getters y setters apropiados o considera si estas variables deben ser accesibles desde fuera de la clase en primer lugar.
+
+Este es solo un enfoque general. Dependiendo de la arquitectura y diseño específico de tu programa, puede haber otras formas de organizar los métodos.
