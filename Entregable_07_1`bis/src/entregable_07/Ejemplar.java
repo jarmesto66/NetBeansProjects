@@ -53,7 +53,7 @@ public class Ejemplar {
     }
     
     public String toString(){
-        return ("Título: " + titulo + " Autor: " + autor + " Género: " + genero);
+        return ("Título: " + titulo + "ort Autor: " + autor + " Género: " + genero);
     }
     
     public static Genero leerGenero() {
