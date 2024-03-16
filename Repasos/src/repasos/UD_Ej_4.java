@@ -28,6 +28,8 @@ public class UD_Ej_4 {
             
         }
         
+        
+        
         for (int i = 0; i < notas.length; i++) {
             System.out.print("[");
             for (int j = 0; j < notas[i].length; j++) {
