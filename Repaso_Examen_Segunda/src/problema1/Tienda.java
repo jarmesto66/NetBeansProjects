@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package problema1;
 
 import java.util.ArrayList;
@@ -14,7 +11,7 @@ public class Tienda {
     
     //ATRIBUTOS
     String nombre;
-    ArrayList<Articulo> articulos;
+    ArrayList<Articulo> articulo;
     
     //CONSTRUCTORES (no son necesarios los dos, con uno sobra)
     public Tienda(String nombre) {
@@ -23,7 +20,8 @@ public class Tienda {
     
     public Tienda(String nombre, ArrayList<Articulo> articulos) {
         this.nombre = nombre;
-        this.articulos = new ArrayList<>();
+        if (articulos != null)this.articulo = articulos;
+        else this.articulo = new ArrayList<>();
     }
 
     
@@ -33,7 +31,7 @@ public class Tienda {
     }
 
     public ArrayList<Articulo> getArticulos() {
-        return articulos;
+        return articulo;
     }
 
     
@@ -43,13 +41,13 @@ public class Tienda {
     }
 
     public void setArticulos(ArrayList<Articulo> articulos) {
-        this.articulos = articulos;
+        this.articulo = articulos;
     }
 
     @Override
     public String toString() {
-        String str = ("Tienda: " + nombre);
-        for (Articulo a : articulos) {
+        String str = ("Tienda: " + nombre + "\n");
+        for (Articulo a : articulo) {
             str += (a + "\n");
         }
         return str;
@@ -57,19 +55,24 @@ public class Tienda {
     
     //Añade un artículo a la tienda
     public void añadir(String nombre, double precio, int stock){
+        if (articulo == null) articulo = new ArrayList<>();
         Articulo a = new Articulo(nombre, precio, stock);
-        articulos.add(a);
+        articulo.add(a);
     }
     
     //Elimina un artículo de la tienda de la posición posición
     public boolean eliminar(int posicion){
-        return(articulos.remove(posicion) != null);
+        if (posicion >= 0 && posicion < articulo.size()) { //valida que la posición exista
+        articulo.remove(posicion);
+        return true;
+        }
+        return false;
     }
     
     public boolean eliminar(String nombre){
         //recorreremos todos los artículos
-        for (int i = 0; i < articulos.size(); i++) {
-            if (articulos.get(i).getNombre().equals(nombre)){
+        for (int i = 0; i < articulo.size(); i++) {
+            if (articulo.get(i).getNombre().equals(nombre)){
                 eliminar(i);
                 return true;
             }

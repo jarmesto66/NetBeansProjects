@@ -13,7 +13,7 @@ public class Articulo {
     private int stock;
     
     //ATRIBUTO DE CLASE
-    private final int iva = 21;
+    private final int iva = 21; //el iva es igual para toda la clase
 
     public Articulo(String nombre, double precio, int stock) {
         this.nombre = nombre;
