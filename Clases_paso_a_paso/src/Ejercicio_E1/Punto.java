@@ -1,9 +1,14 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Ejercicio_E1;
 
-package Ejercicio_D1;
+import java.util.Random;
 
 /**
  *
- * @author jarmesto
+ * @author USER
  */
 public class Punto {
     
@@ -32,7 +37,7 @@ public class Punto {
     }
     
     public void imprime(){
-        
+        System.out.println("(" + this.x + "," + this.y + ")");
     }
     
     public void setXY(int x, int y){
@@ -40,7 +45,7 @@ public class Punto {
         this.y = y;
     }
     
-    public void desplaza(int dx, int dy){
+    public void desplazaXY(int dx, int dy){
         this.x += dx;
         this.y += dy;
     }
@@ -48,5 +53,13 @@ public class Punto {
     public double distancia(Punto p){
         return Math.sqrt(Math.pow(this.x - p.x, 2) + Math.pow(this.y - p.y, 2));
     }
+    
+    
+    public static Punto creaPuntoAleatorio() {
+        Random r = new Random();
+        return new Punto(-100+r.nextInt(200), -100 + r.nextInt(200));
+    }
+    
+    
     
 }
