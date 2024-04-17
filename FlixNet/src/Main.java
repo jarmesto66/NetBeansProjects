@@ -10,25 +10,23 @@ public class Main {
     
     public static void escribirMenu(){
         
-        System.out.println("***********************");
-        System.out.println("*** Menú de FLIXNET ***");
-        System.out.println("***********************");
+        System.out.println("\033[31m***********************\033[30m");
+        System.out.println("\033[31m*** Menú de FLIXNET ***\033[30m");
+        System.out.println("\033[31m***********************\033[30m");
         System.out.println("");
         System.out.println("1. Dar de alta una película");
         System.out.println("2. Dar de alta una serie");
         System.out.println("3. Eliminar un contenido");
         System.out.println("4. Ver un contenido");
-        System.out.println("5. Listar contenido");
-        System.out.println("6. Listar contenidos pendientes de ver");
+        System.out.println("\033[34m5. Listar contenido\033[30m");
+        System.out.println("\033[35m6. Listar contenidos pendientes de ver\033[30m");
         System.out.println("7. Salir");
         System.out.println("----------------------------------");
         System.out.print("Introduzca opción: ");
         
     }
     
-    
-    
-    public static Pelicula crearPelicula(){
+    static Pelicula crearPelicula(){
         
         Scanner scanner = new Scanner(System.in);
         String titulo, productora;
@@ -58,7 +56,9 @@ public class Main {
         } while (!(1894 < año && año <= cal.get(Calendar.YEAR)));
         
         do {
-                
+            System.out.println("");
+            System.out.println("¡Recuerde que una película debe tener más o las mismas nominaciones que Oscars obtuvo!");
+            System.out.println("");
             try{
                 System.out.print("Ingrese el número de nominaciones: ");
                 numNominaciones = scanner.nextInt();
@@ -70,24 +70,25 @@ public class Main {
             }
             catch (InputMismatchException eIMEnom){ //Por si leemos algo distinto de Integer
                 scanner.nextLine();
-                System.err.println("Revise los Oscars y nominaciones");
+                System.err.println("Revise los Oscars y nominaciones introducidos");
                 numNominaciones = 0;
                 numOscars = 1;
                 System.out.println("");
             }
         }
-        while (numNominaciones < numOscars);
+        while (!(numNominaciones >= numOscars));
         
         // Crear un nuevo objeto pelicula con la información proporcionada
         Pelicula pel = new Pelicula(numNominaciones, numOscars, titulo, productora, año);
         
-        System.out.println("");
+        System.out.println("**********************************************************");
         System.out.println("La película se ha registrado correctamente en el catálogo.");
+        System.out.println("**********************************************************");
         return pel;
 
     }
 
-    public static Serie crearSerie(){
+    static Serie crearSerie(){
 
         Scanner scanner = new Scanner(System.in);
         String titulo, productora;
@@ -161,7 +162,7 @@ public class Main {
     
     public static void main(String[] args) {
         boolean salir = false;
-        int opMenu = 0;
+        int opMenu;
         Scanner op = new Scanner(System.in);
         ArrayList<Contenido> flixnet = new ArrayList();
         
@@ -181,7 +182,7 @@ public class Main {
         Contenido serie3 = new Serie(15, true, "Curro Jiménez", "Chicho Ibañez", 1980);
         flixnet.add(serie3);
         
-        serie3.setVisto(true);
+        serie3.setVisto(true); //Comprobación de que funciona
         
         while (!salir){
         
@@ -205,40 +206,62 @@ public class Main {
             case 3:
                 Scanner vista3 = new Scanner(System.in);
                 String titulo3;
+                boolean peliculaEncontradaBorr = false;
                 
                 System.out.print("Dime el titulo del contenido a borrar: ");
                 titulo3 = vista3.nextLine();
                 for (Contenido f : flixnet) {
                     if (f.titulo.equals(titulo3)) {
+                        System.out.println("");
                         System.out.println("Se BORRA del catálogo " + f.titulo);
+                        System.out.println("");
                         flixnet.remove(f);
+                        peliculaEncontradaBorr = true;
                         break;
                     }
+                }
+                if (!peliculaEncontradaBorr) {
+                        System.out.println("");
+                        System.out.println("No se ha encontrado el contenido propuesto para ser borrado");
+                        System.out.println("");
                 }
                 break;
             case 4:
                 Scanner vista4 = new Scanner(System.in);
                 String titulo4;
+                boolean peliculaEncontradaVer = false;
                 
                 System.out.print("Dime el titulo del contenido visto: ");
                 titulo4 = vista4.nextLine();
                 for (Contenido f : flixnet) {
                     if (f.titulo.equals(titulo4)) {
+                        System.out.println("");
                         System.out.println("Se marca como VISTA " + f.titulo);
+                        System.out.println("");
                         f.setVisto(true);
+                        peliculaEncontradaVer = true;
                         break;
                     }
                 }
+                if (!peliculaEncontradaVer) {
+                        System.out.println("");
+                        System.out.println("No se ha encontrado el contenido propuesto para visto");
+                        System.out.println("");
+                }
                 break;
             case 5:
+                System.out.println("");
                 for (Contenido f : flixnet) {
-                    System.out.println(f);
+                    System.out.println("\033[34m" + f + "\033[30m");
                 }
+                System.out.println("");
                 break;
             case 6:
+                System.out.println("");
                 for (Contenido f : flixnet) {
-                    if (!f.isVisto()) System.out.println(f);
+                    if (!f.isVisto()) System.out.println("\033[35m" + f + "\033[30m");
                 }
+                System.out.println("");
                 break;
             case 7:
                 System.out.println("Saliendo del programa...");

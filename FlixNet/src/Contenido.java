@@ -44,10 +44,8 @@ public class Contenido {
         this.visto = visto;
     }
 
-    @Override
     public String toString() {
         return "Titulo= " + titulo + ", Productora= " + productora + ", Año= " + año + ", Visto= " + visto;
     }
-    
-    
+
 }

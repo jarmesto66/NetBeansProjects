@@ -19,10 +19,14 @@ public class Main {
         Pro p2 = new Pro ("Andrés Pajares", 56.74);
         Pro p3 = new Pro ("Fernando Esteso", 255);
         
+
+        
         a1.ingresar(1000);
         System.out.println("El saldo de la cuenta " + a1.toString() + " es: " + a1.getSaldo());
         a3.retirar(100);
         System.out.println("El saldo de la cuenta " + a3.toString() + " es: " + a3.getSaldo());
+        
+        System.out.println("");
         
         banco.add(c1);
         banco.add(c2);
@@ -41,6 +45,13 @@ public class Main {
         p1.actualizarMensualidad();
         System.out.println("El saldo de la cuenta " + p1.toString() + " es: " + p1.getSaldo());
         
+        System.out.println("");
+        
+        for (CuentaCorriente b : banco) {
+            
+            System.out.println(b.toString());
+            
+        }
     }
     
     

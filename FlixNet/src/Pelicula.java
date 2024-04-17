@@ -1,8 +1,4 @@
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-
 class Pelicula extends Contenido {
     
     protected int numNominaciones, numOscars;
@@ -29,11 +25,4 @@ class Pelicula extends Contenido {
         this.numOscars = numOscars;
     }
 
-    /*@Override
-    public String toString() {
-        return super.toString() + "Pelicula{" + "numNominaciones=" + numNominaciones + ", numOscars=" + numOscars + '}';
-    }*/
-    
-
-    
 }

@@ -62,7 +62,12 @@ class CuentaCorriente  {
         this.saldo = sal;
         this.saldo -= comisionMensual; //La comisión se carga aunque deje el saldo negativo
     }
-    
 
+    @Override
+    public String toString() {
+        return "CuentaCorriente{" + "titular=" + titular + ", saldo=" + saldo + ", comisionOperacion=" + comisionOperacion + ", comisionMensual=" + comisionMensual + ", interesMensual=" + interesMensual + '}';
+    }
+    
+    
     
 }
