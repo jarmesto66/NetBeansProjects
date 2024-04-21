@@ -1,13 +1,10 @@
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    
-
-    
+        
     public static void escribirMenu(){
         
         System.out.println("\033[31m***********************\033[30m");
@@ -20,7 +17,8 @@ public class Main {
         System.out.println("4. Ver un contenido");
         System.out.println("\033[34m5. Listar contenido\033[30m");
         System.out.println("\033[35m6. Listar contenidos pendientes de ver\033[30m");
-        System.out.println("7. Salir");
+        System.out.println("7. Hazme un listado de películas con nominaciones y Oscars ganados - OPCION BONUS-TRACK"); //Opción BONUS-TRACK
+        System.out.println("8. Salir");
         System.out.println("----------------------------------");
         System.out.print("Introduzca opción: ");
         
@@ -263,7 +261,16 @@ public class Main {
                 }
                 System.out.println("");
                 break;
-            case 7:
+            case 7: //Opción BONUS-TRACK. Listamos solo películas con información de Nominaciones y Oscars
+                System.out.println("");
+                for (Contenido contenido : flixnet) {
+                    if (contenido instanceof Pelicula) {
+                        System.out.println("Título: " + contenido.titulo + " Nominaciones: " + ((Pelicula) contenido).getNumNominaciones() + " Oscars: " + ((Pelicula) contenido).getNumOscars());
+                    }
+                }
+                System.out.println("");
+                break;
+            case 8:
                 System.out.println("Saliendo del programa...");
                 salir = true;
                 break;
@@ -275,6 +282,8 @@ public class Main {
             }
         
     }
+        
+
         
     }
 }

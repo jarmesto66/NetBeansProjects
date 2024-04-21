@@ -1,7 +1,7 @@
 
 class Pelicula extends Contenido {
     
-    protected int numNominaciones, numOscars;
+    int numNominaciones, numOscars;
 
     public Pelicula(int numNominaciones, int numOscars, String titulo, String productora, int año) {
         super(titulo, productora, año);
