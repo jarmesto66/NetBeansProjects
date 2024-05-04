@@ -1,19 +1,19 @@
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Date;
 
+
 public class MiniFileManager {
     
     private File dirTrabajo;
-    private String nombreUsuario;
 
-    public MiniFileManager(String dirInicial, String nombreUsuario) {
-        this.dirTrabajo = new File(dirInicial);
-        this.nombreUsuario = nombreUsuario;
+    public MiniFileManager() {
+        dirTrabajo = new File(System.getProperty("user.dir"));
     }
     
     public String generaPrompt(){
-        return nombreUsuario + "@" + nombreUsuario + ":" + dirTrabajo.getAbsolutePath() + "$ ";
+        return System.getProperty("user.name") + "@" + System.getProperty("user.name") + ":" + dirTrabajo.getAbsolutePath() + "$ ";
     }
 
     public String getPWD() {

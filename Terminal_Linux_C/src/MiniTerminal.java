@@ -1,48 +1,46 @@
+
+
 import java.util.Scanner;
 
+
 public class MiniTerminal {
+   
     
-    private static String generaPrompt(String directory, String userName, String hostName) {
-        return userName + "@" + hostName + ":" + directory + "$ ";
+    private static String generaPrompt(String directory) {
+        return System.getProperty("user.name") + "@" + System.getProperty("hostname") + ":" + directory + "$ ";
     }
 
     public static void main(String[] args) {
 
-        String userName = System.getProperty("user.name");
-        String hostName = "localhost";
-        
-
-        String dirInicial = "/ruta/al/directorio/inicial"; // Aquí se proporciona el directorio de trabajo inicial
-
-        MiniFileManager fileManager = new MiniFileManager(dirInicial, userName);
+        MiniFileManager fileManager = new MiniFileManager();
         Scanner scr = new Scanner(System.in);
         
         System.out.println("Bienvenido al MiniTerminal. Escribe 'help' para obtener ayuda.");
         
         while (true) {
-            String prompt = generaPrompt(fileManager.getPWD(), userName, hostName);
+            String prompt = generaPrompt(fileManager.getPWD());
             System.out.print(prompt);
             
-            String comando = scr.nextLine().trim();
+            String input = scr.nextLine().trim();
             
-            if (comando.equals("exit")) {
+            if (input.equals("exit")) {
                 System.out.println("Saliendo del MiniTerminal...");
                 break;
             }
             
             try {
-                String[] argumentos = comando.split(" ");
-                String command = argumentos[0];
+                String[] parts = input.split(" ");
+                String command = parts[0];
                 
                 switch (command) {
                     case "pwd":
                         System.out.println(fileManager.getPWD());
                         break;
                     case "cd":
-                        if (argumentos.length < 2) {
+                        if (parts.length < 2) {
                             System.out.println("Falta el argumento para cd.");
                         } else {
-                            if (!fileManager.changeDir(argumentos[1])) {
+                            if (!fileManager.changeDir(parts[1])) {
                                 System.out.println("No se pudo cambiar de directorio.");
                             }
                         }
@@ -54,28 +52,28 @@ public class MiniTerminal {
                         fileManager.printList(true);
                         break;
                     case "mkdir":
-                        if (argumentos.length < 2) {
+                        if (parts.length < 2) {
                             System.out.println("Falta el nombre del directorio.");
                         } else {
-                            if (!fileManager.makeDir(argumentos[1])) {
+                            if (!fileManager.makeDir(parts[1])) {
                                 System.out.println("No se pudo crear el directorio.");
                             }
                         }
                         break;
                     case "rm":
-                        if (argumentos.length < 2) {
+                        if (parts.length < 2) {
                             System.out.println("Falta el nombre del archivo/directorio a borrar.");
                         } else {
-                            if (!fileManager.deleteFile(argumentos[1])) {
+                            if (!fileManager.deleteFile(parts[1])) {
                                 System.out.println("No se pudo borrar el archivo/directorio.");
                             }
                         }
                         break;
                     case "mv":
-                        if (argumentos.length < 3) {
+                        if (parts.length < 3) {
                             System.out.println("Faltan argumentos para mv.");
                         } else {
-                            if (!fileManager.moveFile(argumentos[1], argumentos[2])) {
+                            if (!fileManager.moveFile(parts[1], parts[2])) {
                                 System.out.println("No se pudo mover/renombrar el archivo/directorio.");
                             }
                         }
