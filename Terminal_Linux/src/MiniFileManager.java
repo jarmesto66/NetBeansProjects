@@ -5,30 +5,35 @@ import java.util.Date;
 public class MiniFileManager {
     
     private File dirTrabajo;
-    private String nombreUsuario;
+    private String nombreUsuario, nombreHost;
 
-    public MiniFileManager(String dirInicial, String nombreUsuario) {
+    public MiniFileManager(String dirInicial, String nombreUsuario, String nombreHost) {
         this.dirTrabajo = new File(dirInicial);
         this.nombreUsuario = nombreUsuario;
+        this.nombreHost = nombreHost;
     }
     
     public String generaPrompt(){
-        return nombreUsuario + "@" + nombreUsuario + ":" + dirTrabajo.getAbsolutePath() + "$ ";
+        return nombreHost + "@" + nombreUsuario + ":" + dirTrabajo.getAbsolutePath() + "$ ";
     }
 
     public String getPWD() {
-        return dirTrabajo.getAbsolutePath();
+        //return dirTrabajo.getAbsolutePath(); <== No acababa de funcionar bien al hacer 'cd ..'
+        return dirTrabajo.toPath().normalize().toAbsolutePath().toString(); //Buscada en Google
     }
 
     public boolean changeDir(String dir) {
-        File newDir = new File(dirTrabajo, dir);
-        if (newDir.isDirectory()) {
-            dirTrabajo = newDir;
+        File nuevoDir = new File(dirTrabajo, dir);
+        if (nuevoDir.isDirectory()) {
+            dirTrabajo = nuevoDir;
             return true;
         } else if (dir.equals("..")) {
-            dirTrabajo = dirTrabajo.getParentFile();
-            return true;
-        }
+                    File padreDir = dirTrabajo.getParentFile(); //Obtenemos el padre
+                    if (padreDir != null) { //Verifico que hay un padre
+                        dirTrabajo = padreDir;
+                        return true;
+                    }
+               }
         return false;
     }
 
@@ -56,8 +61,8 @@ public class MiniFileManager {
     }
 
     public boolean makeDir(String dir) {
-        File newDir = new File(dirTrabajo, dir);
-        return newDir.mkdir();
+        File nuevoDir = new File(dirTrabajo, dir);
+        return nuevoDir.mkdir();
     }
 
     public boolean deleteFile(String fileName) {

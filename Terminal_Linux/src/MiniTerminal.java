@@ -2,28 +2,28 @@ import java.util.Scanner;
 
 public class MiniTerminal {
     
-    private static String generaPrompt(String directory, String userName, String hostName) {
-        return userName + "@" + hostName + ":" + directory + "$ ";
+    private static String generaPrompt(String directory, String nombreUsuario, String nombreHost) {
+        return nombreUsuario + "@" + nombreHost + ":" + directory + "$ ";
     }
 
     public static void main(String[] args) {
 
-        String userName = System.getProperty("user.name");
-        String hostName = "localhost";
+        String nombreUsuario = System.getProperty("user.name");
+        String nombreHost = "localhost";
         
 
-        String dirInicial = "/ruta/al/directorio/inicial"; // Aquí se proporciona el directorio de trabajo inicial
+        String dirInicial = "C:\\Users\\armes\\Downloads"; // Aquí se proporciona el directorio de trabajo inicial para la simulación
 
-        MiniFileManager fileManager = new MiniFileManager(dirInicial, userName);
+        MiniFileManager fileManager = new MiniFileManager(dirInicial, nombreUsuario, nombreHost);
         Scanner scr = new Scanner(System.in);
         
         System.out.println("Bienvenido al MiniTerminal. Escribe 'help' para obtener ayuda.");
         
         while (true) {
-            String prompt = generaPrompt(fileManager.getPWD(), userName, hostName);
+            String prompt = generaPrompt(fileManager.getPWD(), nombreUsuario, nombreHost);
             System.out.print(prompt);
             
-            String comando = scr.nextLine().trim();
+            String comando = scr.nextLine().trim(); //Elimina espacios iniciales y finales del String leído
             
             if (comando.equals("exit")) {
                 System.out.println("Saliendo del MiniTerminal...");
@@ -31,8 +31,8 @@ public class MiniTerminal {
             }
             
             try {
-                String[] argumentos = comando.split(" ");
-                String command = argumentos[0];
+                String[] argumentos = comando.split(" "); //Separa el String usando espacio como separador
+                String command = argumentos[0]; //El comando será el primer String resultante (posición 0)
                 
                 switch (command) {
                     case "pwd":
@@ -101,6 +101,6 @@ public class MiniTerminal {
             }
         }
         
-        scr.close();
+        scr.close(); //Limpiamos el scanner para la nueva iteración
     }
 }
