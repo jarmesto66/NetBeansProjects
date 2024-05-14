@@ -12,7 +12,7 @@ public class MiniTerminal {
         String nombreHost = "localhost";
         
 
-        String dirInicial = "C:\\Users\\armes\\Downloads"; // Aquí se proporciona el directorio de trabajo inicial para la simulación
+        String dirInicial = "D:\\"; // Aquí se proporciona el directorio de trabajo inicial para la simulación
 
         MiniFileManager fileManager = new MiniFileManager(dirInicial, nombreUsuario, nombreHost);
         Scanner scr = new Scanner(System.in);
