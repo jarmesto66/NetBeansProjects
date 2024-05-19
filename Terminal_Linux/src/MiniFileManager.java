@@ -18,7 +18,7 @@ public class MiniFileManager {
     }
 
     public String getPWD() {
-        //return dirTrabajo.getAbsolutePath(); <== No acababa de funcionar bien al hacer 'cd ..'
+        //return dirTrabajo.getAbsolutePath(); <== No acababa de funcionar bien al hacer 'cd ..' (MISTERIO)
         return dirTrabajo.toPath().normalize().toAbsolutePath().toString(); //Buscada en Google
     }
 
