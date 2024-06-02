@@ -1,7 +1,5 @@
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -9,73 +7,92 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Main extends javax.swing.JFrame {
 
-    private final ArrayList<Contenido> flixnet;
     private JButton btnAgregarPelicula, btnAgregarSerie, btnEliminarContenido, btnVerContenido, btnListarContenido, btnListarPendientes, btnBonusTrack, btnSalir;
     private JTextArea txtAreaContenido;
+    
+    private Connection connection;
 
     public Main() {
         super("FlixNet");
-        flixnet = new ArrayList<>();
-        cargarContenidoInicial();
         initComponents();
+        initializeDatabaseConnection();
     }
-
-    private void cargarContenidoInicial() {
-        //CREAMOS VARIAS PELICULAS
-        Contenido pelicula1 = new Pelicula(0, 0, "El ataque de los muero vivientes", "Sangre films", 1985);
-        flixnet.add(pelicula1);
-        Contenido pelicula2 = new Pelicula(5, 0, "La guerra de las galaxias", "Cosa nostra", 1982);
-        flixnet.add(pelicula2);
-        Contenido pelicula3 = new Pelicula(1, 1, "Todo sobre mi madre", "Almodovar films", 1992);
-        flixnet.add(pelicula3);
-        boolean visto = false;
-
-        //CREAMOS VARIAS SERIES
-        Contenido serie1 = new Serie(15, true, visto, "Big Bang Theory", "Tractor amarillo", 1982);
-        flixnet.add(serie1);
-        Contenido serie2 = new Serie(1, false, visto, "Armaggedon", "Netflix", 2023);
-        flixnet.add(serie2);
-        Contenido serie3 = new Serie(15, true, visto, "Curro Jiménez", "Chicho Ibañez", 1980);
-        flixnet.add(serie3);
-
-        serie3.setVisto(true); //Para comprobar de que funciona
+    
+    private void initializeDatabaseConnection() {
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/flixnet", "javier", "1234javier1234");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error conectando a la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
     }
-
+    
     private void agregarPelicula() {
         Pelicula pelicula = Pelicula.crearPeliculaDesdeFormulario(this);
         if (pelicula != null) {
-            flixnet.add(pelicula);
-            actualizarTxtArea();
+            try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO peliculas (titulo, productora, anio, nominaciones, oscars) VALUES (?, ?, ?, ?, ?)")) {
+                stmt.setString(1, pelicula.getTitulo());
+                stmt.setString(2, pelicula.getProductora());
+                stmt.setInt(3, pelicula.getAño());
+                stmt.setInt(4, pelicula.getNumNominaciones());
+                stmt.setInt(5, pelicula.getNumOscars());
+                stmt.executeUpdate();
+                actualizarTxtArea();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error agregando película.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     private void agregarSerie() {
         Serie serie = Serie.crearSerieDesdeFormulario(this);
         if (serie != null) {
-            flixnet.add(serie);
-            actualizarTxtArea();
+            try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO series (titulo, productora, anio, temporadas, episodios, visto) VALUES (?, ?, ?, ?, ?, ?)")) {
+                stmt.setString(1, serie.getTitulo());
+                stmt.setString(2, serie.getProductora());
+                stmt.setInt(3, serie.getAño());
+                stmt.setInt(4, serie.getnTemporadas());
+                stmt.setBoolean(5, serie.isVisto());
+                stmt.executeUpdate();
+                actualizarTxtArea();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error agregando serie.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     private void eliminarContenido() {
         String titulo = JOptionPane.showInputDialog(this, "Introduce el título del contenido a eliminar:");
         if (titulo != null && !titulo.isEmpty()) {
-            boolean contenidoEncontrado = false;
-            for (Contenido contenido : flixnet) {
-                if (contenido.getTitulo().equals(titulo)) {
-                    flixnet.remove(contenido);
-                    contenidoEncontrado = true;
-                    break;
+            try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM peliculas WHERE titulo = ?")) {
+                stmt.setString(1, titulo);
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected == 0) {
+                    try (PreparedStatement stmt2 = connection.prepareStatement("DELETE FROM series WHERE titulo = ?")) {
+                        stmt2.setString(1, titulo);
+                        rowsAffected = stmt2.executeUpdate();
+                    }
                 }
-            }
-            if (contenidoEncontrado) {
-                JOptionPane.showMessageDialog(this, "El contenido ha sido eliminado correctamente.");
-                actualizarTxtArea();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se ha encontrado el contenido especificado.");
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(this, "El contenido ha sido eliminado correctamente.");
+                    actualizarTxtArea();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se ha encontrado el contenido especificado.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error eliminando contenido.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -83,47 +100,60 @@ public class Main extends javax.swing.JFrame {
     private void verContenido() {
         String titulo = JOptionPane.showInputDialog(this, "Introduce el título del contenido a marcar como visto:");
         if (titulo != null && !titulo.isEmpty()) {
-            boolean contenidoEncontrado = false;
-            for (Contenido contenido : flixnet) {
-                if (contenido.getTitulo().equals(titulo)) {
-                    contenido.setVisto(true);
-                    contenidoEncontrado = true;
-                    break;
+            try (PreparedStatement stmt = connection.prepareStatement("UPDATE series SET visto = true WHERE titulo = ?")) {
+                stmt.setString(1, titulo);
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(this, "El contenido ha sido marcado como visto.");
+                    actualizarTxtArea();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se ha encontrado el contenido especificado.");
                 }
-            }
-            if (contenidoEncontrado) {
-                JOptionPane.showMessageDialog(this, "El contenido ha sido marcado como visto.");
-                actualizarTxtArea();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se ha encontrado el contenido especificado.");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error marcando contenido como visto.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     private void listarContenido() {
         StringBuilder contenidoStr = new StringBuilder("Contenido en FlixNet:\n");
-        for (Contenido contenido : flixnet) {
-            contenidoStr.append(contenido.toString()).append("\n");
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT titulo, productora, anio FROM peliculas UNION SELECT titulo, productora, anio FROM series");
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                contenidoStr.append(rs.getString("titulo")).append(" - ").append(rs.getString("productora")).append(" (").append(rs.getInt("anio")).append(")\n");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error listando contenido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         txtAreaContenido.setText(contenidoStr.toString());
     }
 
     private void listarPendientes() {
         StringBuilder pendientesStr = new StringBuilder("Contenido pendiente de ver en FlixNet:\n");
-        for (Contenido contenido : flixnet) {
-            if (!contenido.isVisto()) {
-                pendientesStr.append(contenido.toString()).append("\n");
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT titulo, productora, anio FROM series WHERE visto = false");
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                pendientesStr.append(rs.getString("titulo")).append(" - ").append(rs.getString("productora")).append(" (").append(rs.getInt("anio")).append(")\n");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error listando contenido pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         txtAreaContenido.setText(pendientesStr.toString());
     }
 
     private void bonusTrack() {
         StringBuilder bonusStr = new StringBuilder("Películas con nominaciones y Oscars:\n");
-        for (Contenido contenido : flixnet) {
-            if (contenido instanceof Pelicula) {
-                bonusStr.append("Título: ").append(contenido.getTitulo()).append(" Nominaciones: ").append(((Pelicula) contenido).getNumNominaciones()).append(" Oscars: ").append(((Pelicula) contenido).getNumOscars()).append("\n");
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT titulo, nominaciones, oscars FROM peliculas");
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                bonusStr.append("Título: ").append(rs.getString("titulo")).append(" Nominaciones: ").append(rs.getInt("nominaciones")).append(" Oscars: ").append(rs.getInt("oscars")).append("\n");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error listando bonus track.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         txtAreaContenido.setText(bonusStr.toString());
     }

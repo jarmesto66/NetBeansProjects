@@ -18,8 +18,6 @@ class Serie extends Contenido {
         this.nTemporadas = nTemporadas;
         this.finalizada = finalizada;
     }
-    
-    
 
     public int getnTemporadas() {
         return nTemporadas;
