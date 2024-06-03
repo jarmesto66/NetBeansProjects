@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities;
 
 public class Main extends javax.swing.JFrame {
 
-    private ArrayList<Contenido> flixnet;
+    private final ArrayList<Contenido> flixnet;
     private JButton btnAgregarPelicula, btnAgregarSerie, btnEliminarContenido, btnVerContenido, btnListarContenido, btnListarPendientes, btnBonusTrack, btnSalir;
     private JTextArea txtAreaContenido;
 
