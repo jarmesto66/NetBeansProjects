@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2024 a las 11:36:11
+-- Tiempo de generación: 05-06-2024 a las 11:58:01
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -73,9 +73,7 @@ INSERT INTO `peliculas` (`id`, `titulo`, `productora`, `año`, `numNominaciones`
 (2, 'El Padrino', 'Paramount Pictures', 1972, 11, 3, 0),
 (3, 'La La Land', 'Summit Entertainment', 2016, 14, 6, 0),
 (4, 'Parásitos', 'Barunson E&A', 2019, 280, 4, 0),
-(5, 'El Señor de los Anillos: El Retorno del Rey', 'New Line Cinema', 2003, 11, 11, 0),
-(6, 'La mala leche', 'El deseo', 2000, 0, 0, 0),
-(7, 'La mala leche', 'Net', 2000, 0, 0, 0);
+(5, 'El Señor de los Anillos: El Retorno del Rey', 'New Line Cinema', 2003, 11, 11, 0);
 
 -- --------------------------------------------------------
 

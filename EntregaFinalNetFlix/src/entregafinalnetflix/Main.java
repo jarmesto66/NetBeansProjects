@@ -41,7 +41,6 @@ public class Main extends javax.swing.JFrame {
                 flixnet.add(pelicula);
             }
         }
-
         // Consulta SQL para seleccionar series desde la tabla 'series'
         String querySeries = "SELECT * FROM series";
         try (Statement stmt = conn.createStatement()) {
@@ -54,13 +53,7 @@ public class Main extends javax.swing.JFrame {
     } catch (SQLException e) {
         e.printStackTrace();
     }
-
-    // Imprimir la lista flixnet para verificar si se han cargado los datos correctamente
-    System.out.println("Datos cargados inicialmente:");
-    for (Contenido contenido : flixnet) {
-        System.out.println(contenido);
     }
-}
 
     private void eliminarContenido() {
             String titulo = JOptionPane.showInputDialog(this, "Introduce el título del contenido a eliminar:");
