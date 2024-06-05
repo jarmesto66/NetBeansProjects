@@ -1,70 +1,45 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package Persona;
 
-/**
- *
- * @author María
- */
 public class Persona {
-
-    private String nombre, dni, direccion;
-    private int telefono;
-
-    public Persona(String nombre, String dni, String direccion, int telefono) {
-        this.nombre = nombre;
-        this.dni = dni;
-        this.direccion = direccion;
-        this.telefono = telefono;
-    }
     
-    public void mostrarPersona(){
-        
-        System.out.println("Nombre: " + this.nombre);
-        System.out.println("DNI: " + this.dni);
-        System.out.println("Dirección: " + this.direccion);
-        System.out.println("Teléfono: " + this.telefono);
-        
+    private String nombre;
+    private String apellidos;
+    private String fechaNacim;
+
+    public Persona(String nombre, String apellidos, String fechaNacim) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNacim = fechaNacim;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getDni() {
-        return dni;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public int getTelefono() {
-        return telefono;
+    public String getFechaNacim() {
+        return fechaNacim;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setFechaNacim(String fechaNacim) {
+        this.fechaNacim = fechaNacim;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    @Override
+    public String toString() {
+        return "Persona: " + "Nombre " + nombre + ", Apellidos " + apellidos + ", Fecha Nacimiento " + fechaNacim;
     }
     
-    
-
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
     
 }

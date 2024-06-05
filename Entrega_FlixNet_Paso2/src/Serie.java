@@ -13,11 +13,13 @@ class Serie extends Contenido {
         protected int nTemporadas;
         protected boolean finalizada;
 
-    public Serie(int nTemporadas, boolean finalizada, boolean visto1, String titulo, String productora, int año) {
-        super(titulo, productora, año);
+    public Serie(int nTemporadas, boolean finalizada, boolean visto, String titulo, String productora, int anio) {
+        super(titulo, productora, anio, visto);
         this.nTemporadas = nTemporadas;
         this.finalizada = finalizada;
     }
+    
+    
 
     public int getnTemporadas() {
         return nTemporadas;
@@ -62,7 +64,7 @@ class Serie extends Contenido {
             try {
                 String titulo = tituloField.getText();
                 String productora = productoraField.getText();
-                int anno = Integer.parseInt(annoField.getText());
+                int annio = Integer.parseInt(annoField.getText());
                 int temporadas = Integer.parseInt(temporadasField.getText());
                 //boolean visto = vistoBox.isSelected();
                 boolean finalizada = finalizadaBox.isSelected();
@@ -73,7 +75,7 @@ class Serie extends Contenido {
                 }
 
                 // Crear y retornar la Serie
-                return new Serie(temporadas, finalizada, false, titulo, productora, anno);
+                return new Serie(temporadas, finalizada, false, titulo, productora, annio);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(parent, "Error: Año y Número de Temporadas deben ser números enteros.", "Error", JOptionPane.ERROR_MESSAGE);
                 return null;

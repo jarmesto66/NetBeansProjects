@@ -1,50 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Persona;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author María
- */
 public class Main {
-    
+
+
     public static void main(String[] args) {
         
-        Persona p = new Persona ("Pepe", "00000000A", "C/ Colón", 666666666);
+        ArrayList<Persona> personas = new ArrayList<>();
         
-        System.out.println("Mostramos una persona");
-        p.mostrarPersona();
+        //Instanciamos Persona
+        Persona persona1 = new Persona("Javier", "Armesto Bartolomé", "01/11/1966");
+        Persona persona2 = new Persona("Lionel", "Alcocer", "02/01/1976");
+        Persona persona3 = new Persona("Andrés", "Martínez Prior", "11/08/1936");
         
-        ArrayList notas = new ArrayList();
+        //Instanciamos Profesor
+        Profesor profesor1 = new Profesor(2000, "PRG", "Javier", "Armesto Bartolomé", "01/11/1966");
+        Profesor profesor2 = new Profesor(2000, "SSII", "Jose Manuel", "Navarro", "05/10/1976");
+        Profesor profesor3 = new Profesor(2000, "PRG", "Javier", "Armesto Bartolomé", "09/12/1980");
         
-        notas.add(7);
-        notas.add(5);
-        notas.add(9);
-        notas.add(2);
-        notas.add(6);
+        //Instanciamos Alumno
+        Alumno alumno1 = new Alumno("PRIMERO", 5.6, "Javier", "Pérez Pérez", "28/08/2000");
+        Alumno alumno2 = new Alumno("SEGUNDO", 6.7, "Maikol", "Andrés Navarro", "28/08/2000");
+        Alumno alumno3 = new Alumno("TFC", 9, "Luis", "Martínez Andrés", "28/08/2000");
         
-        Alumno a = new Alumno(1, 1, "DAW", notas, "María", "12345678W", "Pº Libertad", 111111111);
+        // Persona String nombre, String apellidos, String fechaNacim
+        personas.add(persona1);
+        personas.add(persona2);
+        personas.add(persona3);
+        personas.add(profesor1);
+        personas.add(profesor2);
+        personas.add(profesor3);
+        personas.add(alumno1);
+        personas.add(alumno2);
+        personas.add(alumno3);
         
-        System.out.println("----------------------------");
-        System.out.println("Mostramos un alumno");
-        a.mostrarPersona();
+        for (Persona persona : personas) {
+            System.out.println(persona.toString());
+        }
         
-        ArrayList modulos = new ArrayList();
-        
-        modulos.add("PRG");
-        modulos.add("LM");
-        modulos.add("SSII");
-        
-        Profesor profe = new Profesor(3, "Informática", "Mañanas", modulos, "Juan", "00000002J", "C/ Java", 222222222);
-        
-        System.out.println("----------------------------");
-        System.out.println("Mostramos un profesor");
-        profe.mostrarPersona();
-        
-    
     }
+    
 }

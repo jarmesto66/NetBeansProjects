@@ -2,13 +2,13 @@
 public class Contenido {
     
     protected String titulo, productora;
-    protected int año;
+    protected int anio;
     protected boolean visto;
 
-    public Contenido(String titulo, String productora, int año) {
+    public Contenido(String titulo, String productora, int anio, boolean visto) {
         this.titulo = titulo;
         this.productora = productora;
-        this.año = año;
+        this.anio = anio;
         this.visto = false;
     }
 
@@ -21,7 +21,7 @@ public class Contenido {
     }
 
     public int getAño() {
-        return año;
+        return anio;
     }
 
     public boolean isVisto() {
@@ -36,8 +36,8 @@ public class Contenido {
         this.productora = productora;
     }
 
-    public void setAño(int año) {
-        this.año = año;
+    public void setAño(int anio) {
+        this.anio = anio;
     }
 
     public void setVisto(boolean visto) {
@@ -46,7 +46,7 @@ public class Contenido {
 
     @Override
     public String toString() {
-        return "Titulo= " + titulo + ", Productora= " + productora + ", Año= " + año + ", Visto= " + visto;
+        return "Titulo= " + titulo + ", Productora= " + productora + ", Año= " + anio + ", Visto= " + visto;
     }
 
 }

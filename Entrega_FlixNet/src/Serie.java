@@ -7,30 +7,21 @@ import java.util.Scanner;
 class Serie extends Contenido {
         
         protected int nTemporadas;
-        protected boolean finalizada;
+        
 
-    public Serie(int nTemporadas, boolean finalizada, String titulo, String productora, int año) {
+    public Serie(int nTemporadas, String titulo, String productora, int año) {
         super(titulo, productora, año);
         this.nTemporadas = nTemporadas;
-        this.finalizada = finalizada;
     }
 
     public int getnTemporadas() {
         return nTemporadas;
     }
 
-    public boolean isFinalizada() {
-        return finalizada;
-    }
-
     public void setnTemporadas(int nTemporadas) {
         this.nTemporadas = nTemporadas;
     }
 
-    public void setFinalizada(boolean finalizada) {
-        this.finalizada = finalizada;
-    }
-    
     static Serie crearSerie(){
 
         Scanner scanner = new Scanner(System.in);
@@ -77,20 +68,8 @@ class Serie extends Contenido {
             
         } while (!(1894 < año && año <= cal.get(Calendar.YEAR)));
         
-        do{
-            System.out.print("¿Ha finalizado? S/N -> ");
-            respuesta = scanner.next().charAt(0);
-            scanner.nextLine();
-        }
-        while (respuesta != 's' && respuesta != 'n' && respuesta != 'S' && respuesta != 'N');
-        
-        if ((respuesta == 'S') && (respuesta == 's')) {
-            finalizada = true;
-        }
-        else finalizada = false;
-        
         // Crear un nuevo objeto serie con la información proporcionada
-        Serie ser = new Serie(nTemporadas, finalizada, titulo, productora, año);
+        Serie ser = new Serie(nTemporadas, titulo, productora, año);
         
         System.out.println("*******************************************************");
         System.out.println("La serie se ha registrado correctamente en el catálogo.");

@@ -19,11 +19,11 @@ public class Main {
         flixnet.add(pelicula3);
         
         //CREAMOS VARIAS SERIES
-        Contenido serie1 = new Serie(15, true, "Big Bang Theory", "Tractor amarillo", 1982);
+        Contenido serie1 = new Serie(15, "Big Bang Theory", "Tractor amarillo", 1982);
         flixnet.add(serie1);
-        Contenido serie2 = new Serie(1, false, "Armaggedon", "Netflix", 2023);
+        Contenido serie2 = new Serie(1, "Armaggedon", "Netflix", 2023);
         flixnet.add(serie2);
-        Contenido serie3 = new Serie(15, true, "Curro Jiménez", "Chicho Ibañez", 1980);
+        Contenido serie3 = new Serie(15, "Curro Jiménez", "Chicho Ibañez", 1980);
         flixnet.add(serie3);
         
         serie3.setVisto(true); //Para comprobar de que funciona

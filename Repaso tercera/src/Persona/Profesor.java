@@ -1,75 +1,41 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Persona;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-/**
- *
- * @author María
- */
 public class Profesor extends Persona {
-    
-    private int cod;
-    private String depto, horario;
-    private ArrayList modulos;
 
-    public Profesor(int cod, String depto, String horario, ArrayList modulos, String nombre, String dni, String direccion, int telefono) {
-        super(nombre, dni, direccion, telefono);
-        this.cod = cod;
-        this.depto = depto;
-        this.horario = horario;
-        this.modulos = modulos;
-    }
-    
-    public void mostrarPersona(){
-        
-        super.mostrarPersona();
-        
-        System.out.println("Código: " + this.cod);
-        System.out.println("Departamento: " + this.depto);
-        System.out.println("Horario: " + this.horario);
-        System.out.println("Módulos:");
-        for (Iterator it = this.modulos.iterator(); it.hasNext();) {
-            System.out.println("\tMódulo: " + it.next());
-        }
+    private int salario;
+    private String especialidad;
+
+    public Profesor(int salario, String especialidad, String nombre, String apellidos, String fechaNacim) {
+        super(nombre, apellidos, fechaNacim);
+        this.salario = salario;
+        this.especialidad = especialidad;
     }
 
-    public int getCod() {
-        return cod;
+    public int getSalario() {
+        return salario;
     }
 
-    public String getDepto() {
-        return depto;
+    public void setSalario(int salario) {
+        this.salario = salario;
     }
 
-    public String getHorario() {
-        return horario;
+    public String getEspecialidad() {
+        return especialidad;
     }
 
-    public ArrayList getModulos() {
-        return modulos;
-    }
-
-    public void setCod(int cod) {
-        this.cod = cod;
-    }
-
-    public void setDepto(String depto) {
-        this.depto = depto;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    public void setModulos(ArrayList modulos) {
-        this.modulos = modulos;
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
     
+    @Override
+    public String getNombre(){
+        return "Profesor: " + super.getNombre();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Salario " + salario + " Especialidad " + especialidad;
+    }
     
     
 }

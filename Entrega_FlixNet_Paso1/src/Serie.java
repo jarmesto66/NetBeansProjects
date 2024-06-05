@@ -11,32 +11,20 @@ import javax.swing.JTextField;
 class Serie extends Contenido {
         
         protected int nTemporadas;
-        protected boolean finalizada;
 
-    public Serie(int nTemporadas, boolean finalizada, boolean visto1, String titulo, String productora, int año) {
+    public Serie(int nTemporadas, boolean visto1, String titulo, String productora, int año) {
         super(titulo, productora, año);
         this.nTemporadas = nTemporadas;
-        this.finalizada = finalizada;
     }
-    
-    
 
     public int getnTemporadas() {
         return nTemporadas;
-    }
-
-    public boolean isFinalizada() {
-        return finalizada;
     }
 
     public void setnTemporadas(int nTemporadas) {
         this.nTemporadas = nTemporadas;
     }
 
-    public void setFinalizada(boolean finalizada) {
-        this.finalizada = finalizada;
-    }
-    
     public static Serie crearSerieDesdeFormulario(JFrame parent) {
         JTextField tituloField = new JTextField();
         JTextField productoraField = new JTextField();
@@ -75,7 +63,7 @@ class Serie extends Contenido {
                 }
 
                 // Crear y retornar la Serie
-                return new Serie(temporadas, finalizada, false, titulo, productora, anno);
+                return new Serie(temporadas, false, titulo, productora, anno);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(parent, "Error: Año y Número de Temporadas deben ser números enteros.", "Error", JOptionPane.ERROR_MESSAGE);
                 return null;

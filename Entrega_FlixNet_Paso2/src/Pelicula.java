@@ -15,7 +15,7 @@ class Pelicula extends Contenido {
 public static Pelicula crearPeliculaDesdeFormulario(JFrame frame) {
     JTextField tituloField = new JTextField();
     JTextField productoraField = new JTextField();
-    JTextField añoField = new JTextField();
+    JTextField anioField = new JTextField();
     JTextField nominacionesField = new JTextField();
     JTextField oscarsField = new JTextField();
 
@@ -25,7 +25,7 @@ public static Pelicula crearPeliculaDesdeFormulario(JFrame frame) {
     panel.add(new JLabel("Productora:"));
     panel.add(productoraField);
     panel.add(new JLabel("Año:"));
-    panel.add(añoField);
+    panel.add(anioField);
     panel.add(new JLabel("Nominaciones:"));
     panel.add(nominacionesField);
     panel.add(new JLabel("Oscars:"));
@@ -37,11 +37,11 @@ public static Pelicula crearPeliculaDesdeFormulario(JFrame frame) {
         try {
             String titulo = tituloField.getText();
             String productora = productoraField.getText();
-            int año = Integer.parseInt(añoField.getText());
+            int anio = Integer.parseInt(anioField.getText());
             int nominaciones = Integer.parseInt(nominacionesField.getText());
             int oscars = Integer.parseInt(oscarsField.getText());
 
-            return new Pelicula(nominaciones, oscars, titulo, productora, año);
+            return new Pelicula(nominaciones, oscars, titulo, productora, anio, false);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(frame, "Por favor, ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -52,8 +52,8 @@ public static Pelicula crearPeliculaDesdeFormulario(JFrame frame) {
     
     int numNominaciones, numOscars;
 
-    public Pelicula(int numNominaciones, int numOscars, String titulo, String productora, int año) {
-        super(titulo, productora, año);
+    public Pelicula(int numNominaciones, int numOscars, String titulo, String productora, int anio, boolean visto) {
+        super(titulo, productora, anio, visto);
         this.numNominaciones = numNominaciones;
         this.numOscars = numOscars;
     }
@@ -79,7 +79,7 @@ public static Pelicula crearPeliculaDesdeFormulario(JFrame frame) {
         Scanner scanner = new Scanner(System.in);
         String titulo1, productora1;
         Calendar cal = Calendar.getInstance();
-        int numNominaciones1, numOscars1, año1;
+        int numNominaciones1, numOscars1, anio1;
         
         // Solicitar información de la película al usuario
         System.out.print("Ingrese el título de la película: ");
@@ -87,26 +87,25 @@ public static Pelicula crearPeliculaDesdeFormulario(JFrame frame) {
         System.out.print("Ingrese la productora: ");
         productora1 = scanner.nextLine();
 
+        //Validar año
         do {
         
             try{
                 System.out.print("Ingrese el año: "); //Entre 1895 (invención del cine) y el actual
-                año1 = scanner.nextInt();
+                anio1 = scanner.nextInt();
                 scanner.nextLine(); // Consumir el salto de línea pendiente
-            }
-            catch (InputMismatchException eIMEaño){ //Por si leemos algo distinto de Integer
+            } catch (InputMismatchException eIMEanio){ //Por si leemos algo distinto de Integer
                 scanner.nextLine();
                 System.out.print("Revise el año introducido");
-                año1 = 0;
+                anio1 = 0;
                 System.out.println("");
             }
             
-        } while (!(1894 < año1 && año1 <= cal.get(Calendar.YEAR)));
+        } while (!(1894 < anio1 && anio1 <= cal.get(Calendar.YEAR)));
         
+        //Validar nominaciones y Oscars
         do {
-            System.out.println("");
-            System.out.println("¡Recuerde que una película debe tener más o las mismas nominaciones que Oscars obtuvo!");
-            System.out.println("");
+            System.out.println("\n¡Recuerde que una película debe tener más o las mismas nominaciones que Oscars obtuvo!\n");
             try{
                 System.out.print("Ingrese el número de nominaciones: ");
                 numNominaciones1 = scanner.nextInt();
@@ -127,7 +126,7 @@ public static Pelicula crearPeliculaDesdeFormulario(JFrame frame) {
         while (!(numNominaciones1 >= numOscars1));
         
         // Crear un nuevo objeto pelicula con la información proporcionada
-        Pelicula pel = new Pelicula(numNominaciones1, numOscars1, titulo1, productora1, año1);
+        Pelicula pel = new Pelicula(numNominaciones1, numOscars1, titulo1, productora1, anio1, false);
         
         System.out.println("**********************************************************");
         System.out.println("La película se ha registrado correctamente en el catálogo.");
