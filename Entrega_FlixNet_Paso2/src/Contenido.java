@@ -46,7 +46,7 @@ public class Contenido {
 
     @Override
     public String toString() {
-        return "Titulo= " + titulo + ", Productora= " + productora + ", Año= " + anio + ", Visto= " + visto;
+        return "Titulo= " + titulo + ", Productora= " + productora + ", Año= " + anio;
     }
 
 }

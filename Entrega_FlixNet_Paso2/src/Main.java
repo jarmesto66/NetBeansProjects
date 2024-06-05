@@ -39,7 +39,7 @@ public class Main extends javax.swing.JFrame {
     private void agregarPelicula() {
         Pelicula pelicula = Pelicula.crearPeliculaDesdeFormulario(this);
         if (pelicula != null) {
-            try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO peliculas (titulo, productora, anio, nominaciones, oscars, visto) VALUES (?, ?, ?, ?, ?)")) {
+            try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO peliculas (titulo, productora, año, nominaciones, oscars, visto) VALUES (?, ?, ?, ?, ?)")) {
                 stmt.setString(1, pelicula.getTitulo());
                 stmt.setString(2, pelicula.getProductora());
                 stmt.setInt(3, pelicula.getAño());
@@ -58,13 +58,12 @@ public class Main extends javax.swing.JFrame {
     private void agregarSerie() {
         Serie serie = Serie.crearSerieDesdeFormulario(this);
         if (serie != null) {
-            try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO series (titulo, productora, anio, temporadas, episodios, visto) VALUES (?, ?, ?, ?, ?, ?)")) {
+            try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO series (titulo, productora, año, temporadas, episodios, visto) VALUES (?, ?, ?, ?, ?, ?)")) {
                 stmt.setString(1, serie.getTitulo());
                 stmt.setString(2, serie.getProductora());
                 stmt.setInt(3, serie.getAño());
                 stmt.setInt(4, serie.getnTemporadas());
-                stmt.setBoolean(5, serie.isFinalizada());
-                stmt.setBoolean(6, serie.isVisto());
+                stmt.setBoolean(5, serie.isVisto());
                 stmt.executeUpdate();
                 actualizarTxtArea();
             } catch (SQLException e) {
@@ -151,9 +150,9 @@ public class Main extends javax.swing.JFrame {
         StringBuilder contenidoStr = new StringBuilder("Contenido en FlixNet:\n");
     try {
         // Consulta para obtener películas
-        String queryPeliculas = "SELECT titulo, productora, anio, 'Película' AS tipo FROM peliculas";
+        String queryPeliculas = "SELECT titulo, productora, año, 'Película' AS tipo FROM peliculas";
         // Consulta para obtener series
-        String querySeries = "SELECT titulo, productora, anio, finalizada, 'Serie' AS tipo FROM series";
+        String querySeries = "SELECT titulo, productora, año, finalizada, 'Serie' AS tipo FROM series";
 
         try (PreparedStatement stmtPeliculas = connection.prepareStatement(queryPeliculas);
              ResultSet rsPeliculas = stmtPeliculas.executeQuery();
@@ -163,14 +162,14 @@ public class Main extends javax.swing.JFrame {
             while (rsPeliculas.next()) {
                 contenidoStr.append(rsPeliculas.getString("titulo")).append(" - ")
                             .append(rsPeliculas.getString("productora")).append(" (")
-                            .append(rsPeliculas.getInt("anio")).append(") [")
+                            .append(rsPeliculas.getInt("año")).append(") [")
                             .append(rsPeliculas.getString("tipo")).append("]\n");
             }
 
             while (rsSeries.next()) {
                 contenidoStr.append(rsSeries.getString("titulo")).append(" - ")
                             .append(rsSeries.getString("productora")).append(" (")
-                            .append(rsSeries.getInt("anio")).append(") [")
+                            .append(rsSeries.getInt("año")).append(") [")
                             .append(rsSeries.getString("tipo")).append("]")
                             .append(rsSeries.getBoolean("finalizada") ? " - Finalizada" : "")
                             .append("\n");
@@ -187,9 +186,9 @@ public class Main extends javax.swing.JFrame {
         StringBuilder contenidoStr = new StringBuilder("Contenido pendiente en FlixNet:\n");
         try {
         // Consulta para obtener películas no vistas
-            String queryPeliculas = "SELECT titulo, productora, anio, 'Película' AS tipo FROM peliculas WHERE visto = false";
+            String queryPeliculas = "SELECT titulo, productora, año, 'Película' AS tipo FROM peliculas WHERE visto = false";
         // Consulta para obtener series no vistas
-            String querySeries = "SELECT titulo, productora, anio, finalizada, 'Serie' AS tipo FROM series WHERE visto = false";
+            String querySeries = "SELECT titulo, productora, año, finalizada, 'Serie' AS tipo FROM series WHERE visto = false";
 
             try (PreparedStatement stmtPeliculas = connection.prepareStatement(queryPeliculas);
              ResultSet rsPeliculas = stmtPeliculas.executeQuery();
@@ -201,14 +200,14 @@ public class Main extends javax.swing.JFrame {
             while (rsPeliculas.next()) {
                 contenidoStr.append(rsPeliculas.getString("titulo")).append(" - ")
                             .append(rsPeliculas.getString("productora")).append(" (")
-                            .append(rsPeliculas.getInt("anio")).append(") [")
+                            .append(rsPeliculas.getInt("año")).append(") [")
                             .append(rsPeliculas.getString("tipo")).append("]\n");
             }
 
             while (rsSeries.next()) {
                 contenidoStr.append(rsSeries.getString("titulo")).append(" - ")
                             .append(rsSeries.getString("productora")).append(" (")
-                            .append(rsSeries.getInt("anio")).append(") [")
+                            .append(rsSeries.getInt("año")).append(") [")
                             .append(rsSeries.getString("tipo")).append("]")
                             .append(rsSeries.getBoolean("finalizada") ? " - Finalizada" : "")
                             .append("\n");
