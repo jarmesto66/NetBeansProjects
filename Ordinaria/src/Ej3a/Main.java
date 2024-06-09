@@ -18,6 +18,21 @@ public class Main {
         // Mostrar información de las películas
         System.out.println(pelicula1);
         System.out.println(pelicula2);
+        
+        //Crear objeto lista multimedia tamaño max 10
+        ListaMultimedia lista = new ListaMultimedia(10);
+        
+        
+        //Añadir tres películas a la lista
+        Pelicula pelicula3 = new Pelicula("Inception", "Christopher Nolan", Formato.dvd, 148, "Leonardo DiCaprio", "Ellen Page");
+        Pelicula pelicula4 = new Pelicula("The Dark Knight", "Christopher Nolan", Formato.mov, 152, "Christian Bale", null);
+        if (!lista.add(pelicula3)) System.out.println("ERROR. Película no creada.");
+        if (!lista.add(pelicula4)) System.out.println("ERROR. Película no creada.");
+        
+        
+        //Mostrarlas por pantalla
+        System.out.println(lista.toString());
+
     }
 }
 
