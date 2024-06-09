@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Apuntes">
+  <ClassDiagramComponents>
+    <Class name="Alumno" package="Apuntes" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="exp" type="int" visibility="private"/>
+        <Field name="ciclo" type="String" visibility="private"/>
+        <Field name="curso" type="int" visibility="private"/>
+        <Field name="notas" type="ArrayList" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="exp"/>
+          <Argument type="String" name="ciclo"/>
+          <Argument type="int" name="curso"/>
+          <Argument type="ArrayList" name="notas"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="dni"/>
+          <Argument type="String" name="direccion"/>
+          <Argument type="int" name="telefono"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getExp" returnType="int" visibility="public"/>
+        <Method name="getCiclo" returnType="String" visibility="public"/>
+        <Method name="getCurso" returnType="int" visibility="public"/>
+        <Method name="getNotas" returnType="ArrayList" visibility="public"/>
+        <Method name="setExp" returnType="void" visibility="public">
+          <Argument type="int" name="exp"/>
+        </Method>
+        <Method name="setCiclo" returnType="void" visibility="public">
+          <Argument type="String" name="ciclo"/>
+        </Method>
+        <Method name="setCurso" returnType="void" visibility="public">
+          <Argument type="int" name="curso"/>
+        </Method>
+        <Method name="setNotas" returnType="void" visibility="public">
+          <Argument type="ArrayList" name="notas"/>
+        </Method>
+        <Method name="mostrarPersona" returnType="void" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Main" package="Apuntes" visibility="public" xPosition="676.0" yPosition="76.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Persona" package="Apuntes" visibility="public" xPosition="581.0" yPosition="493.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="dni" type="String" visibility="private"/>
+        <Field name="direccion" type="String" visibility="private"/>
+        <Field name="telefono" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="dni"/>
+          <Argument type="String" name="direccion"/>
+          <Argument type="int" name="telefono"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="getDni" returnType="String" visibility="public"/>
+        <Method name="getDireccion" returnType="String" visibility="public"/>
+        <Method name="getTelefono" returnType="int" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="setDni" returnType="void" visibility="public">
+          <Argument type="String" name="dni"/>
+        </Method>
+        <Method name="setDireccion" returnType="void" visibility="public">
+          <Argument type="String" name="direccion"/>
+        </Method>
+        <Method name="setTelefono" returnType="void" visibility="public">
+          <Argument type="int" name="telefono"/>
+        </Method>
+        <Method name="mostrarPersona" returnType="void" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Profesor" package="Apuntes" visibility="public" xPosition="880.0" yPosition="20.0">
+      <Fields>
+        <Field name="cod" type="int" visibility="private"/>
+        <Field name="depto" type="String" visibility="private"/>
+        <Field name="modulos" type="ArrayList" visibility="private"/>
+        <Field name="horario" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="cod"/>
+          <Argument type="String" name="depto"/>
+          <Argument type="ArrayList" name="modulos"/>
+          <Argument type="String" name="horario"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="dni"/>
+          <Argument type="String" name="direccion"/>
+          <Argument type="int" name="telefono"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCod" returnType="int" visibility="public"/>
+        <Method name="getDepto" returnType="String" visibility="public"/>
+        <Method name="getModulos" returnType="ArrayList" visibility="public"/>
+        <Method name="getHorario" returnType="String" visibility="public"/>
+        <Method name="setCod" returnType="void" visibility="public">
+          <Argument type="int" name="cod"/>
+        </Method>
+        <Method name="setDepto" returnType="void" visibility="public">
+          <Argument type="String" name="depto"/>
+        </Method>
+        <Method name="setModulos" returnType="void" visibility="public">
+          <Argument type="ArrayList" name="modulos"/>
+        </Method>
+        <Method name="setHorario" returnType="void" visibility="public">
+          <Argument type="String" name="horario"/>
+        </Method>
+        <Method name="mostrarPersona" returnType="void" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="Apuntes.Profesor" target="Apuntes.Persona"/>
+    <IsRelation name="is" source="Apuntes.Alumno" target="Apuntes.Persona"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
